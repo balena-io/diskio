@@ -22,6 +22,7 @@ The API is similar to NodeJS's [fs module](http://nodejs.org/api/fs.html#fs_file
 Example:
 
 ```coffee
+var fs = require('fs');
 var diskio = require('diskio');
 var stream = fs.createReadStream('../path/to/ubuntu.iso');
 
