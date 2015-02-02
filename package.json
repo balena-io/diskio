@@ -25,6 +25,9 @@
   },
   "author": "Juan Cruz Viotti <juanchiviotti@gmail.com>",
   "license": "MIT",
+  "optionalDependencies": {
+		"diskpart": "^1.0.0"
+  },
   "devDependencies": {
     "chai": "~1.10.0",
     "coffee-script": "~1.8.0",
