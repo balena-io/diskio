@@ -45,7 +45,7 @@ $ npm install --save diskio
 Documentation
 -------------
 
-### diskio.write(String device, Buffer buffer, Number offset, Number length, Number position, Function callback)
+#### diskio.write(String device, Buffer buffer, Number offset, Number length, Number position, Function callback)
 
 Similar to [fs.write](http://nodejs.org/api/fs.html#fs_fs_write_fd_buffer_offset_length_position_callback).
 
@@ -53,7 +53,7 @@ It accepts a device string, such as `/dev/disk1` or `\\.\PhysicalDrive1`.
 
 The callback gets one argument: `(error)`.
 
-### diskio.writeStream(String device, Readable Stream stream, Function callback)
+#### diskio.writeStream(String device, Readable Stream stream, Function callback)
 
 Pipe a readable stream to a device.
 
@@ -61,7 +61,7 @@ It accepts a device string, such as `/dev/disk1` or `\\.\PhysicalDrive1`.
 
 The callback gets one argument: `(error)`.
 
-### diskio.read(String device, Buffer buffer, Number offset, Number length, Number position, Function callback)
+#### diskio.read(String device, Buffer buffer, Number offset, Number length, Number position, Function callback)
 
 Similar to [fs.read](http://nodejs.org/api/fs.html#fs_fs_read_fd_buffer_offset_length_position_callback).
 
