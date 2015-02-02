@@ -26,4 +26,4 @@ exports.eraseMBR = (device, callback) ->
 
 # TODO: Find a way to test this
 exports.rescanDrives = (callback) ->
-	diskpart?.evaluate([ 'rescan' ], callback)
+	diskpart?.evaluate([ 'rescan' ], _.unary(callback))

@@ -33,5 +33,5 @@ exports.eraseMBR = function(device, callback) {
 };
 
 exports.rescanDrives = function(callback) {
-  return diskpart != null ? diskpart.evaluate(['rescan'], callback) : void 0;
+  return diskpart != null ? diskpart.evaluate(['rescan'], _.unary(callback)) : void 0;
 };

@@ -8,6 +8,28 @@ _ = require('lodash-contrib');
 
 IO_FLAGS = 'rs+';
 
+exports.readFromDevice = function(device, buffer, offset, length, position, callback) {
+  return async.waterfall([
+    function(callback) {
+      return fs.open(device, IO_FLAGS, null, callback);
+    }, function(fd, callback) {
+      return fs.read(fd, buffer, offset, length, position, function(error, bytesWritten, readBuffer) {
+        if (error != null) {
+          return callback(error);
+        }
+        return callback(null, bytesWritten, fd);
+      });
+    }, function(bytesWritten, fd, callback) {
+      var error;
+      if (bytesWritten !== length) {
+        error = "Bytes written: " + bytesWritten + ", expected " + length;
+        return callback(error);
+      }
+      return fs.close(fd, callback);
+    }
+  ], callback);
+};
+
 exports.writeBufferToDevice = function(device, buffer, offset, length, position, callback) {
   return async.waterfall([
     function(callback) {

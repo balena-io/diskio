@@ -15,3 +15,5 @@ exports.writeStream = function(device, stream, callback) {
     return drive.pipeStreamToDevice(device, stream, done);
   }, callback);
 };
+
+exports.read = drive.readFromDevice;
