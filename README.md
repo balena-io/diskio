@@ -3,6 +3,7 @@ diskio
 
 [![npm version](https://badge.fury.io/js/diskio.svg)](http://badge.fury.io/js/diskio)
 [![dependencies](https://david-dm.org/resin-io/diskio.png)](https://david-dm.org/resin-io/diskio.png)
+[![Build Status](https://travis-ci.org/resin-io/diskio.svg?branch=master)](https://travis-ci.org/resin-io/diskio)
 
 Raw disk I/O that works in all major operating systems.
 
