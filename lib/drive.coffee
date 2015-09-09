@@ -1,6 +1,7 @@
 async = require('async')
 fs = require('fs')
 _ = require('lodash-contrib')
+chunkingStreams = require('chunking-streams')
 
 IO_FLAGS = 'rs+'
 
@@ -59,7 +60,13 @@ exports.pipeStreamToDevice = (device, stream, callback) ->
 
 	deviceFileStream.on('error', callback)
 
-	stream
-		.pipe(deviceFileStream)
-		.on('error', _.unary(callback))
-		.on('close', _.unary(callback))
+	chunker = new chunkingStreams.SizeChunker
+		chunkSize: 512
+		flushTail: false
+
+	chunker.on 'data', (chunk) ->
+		deviceFileStream.write(chunk.data)
+
+	chunker.on('end', callback)
+
+	stream.pipe(chunker)
