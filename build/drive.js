@@ -1,10 +1,12 @@
-var IO_FLAGS, async, fs, _;
+var IO_FLAGS, async, chunkingStreams, fs, _;
 
 async = require('async');
 
 fs = require('fs');
 
 _ = require('lodash-contrib');
+
+chunkingStreams = require('chunking-streams');
 
 IO_FLAGS = 'rs+';
 
@@ -53,10 +55,18 @@ exports.writeBufferToDevice = function(device, buffer, offset, length, position,
 };
 
 exports.pipeStreamToDevice = function(device, stream, callback) {
-  var deviceFileStream;
+  var chunker, deviceFileStream;
   deviceFileStream = fs.createWriteStream(device, {
     flags: IO_FLAGS
   });
   deviceFileStream.on('error', callback);
-  return stream.pipe(deviceFileStream).on('error', _.unary(callback)).on('close', _.unary(callback));
+  chunker = new chunkingStreams.SizeChunker({
+    chunkSize: 512,
+    flushTail: false
+  });
+  chunker.on('data', function(chunk) {
+    return deviceFileStream.write(chunk.data);
+  });
+  chunker.on('end', callback);
+  return stream.pipe(chunker);
 };
