@@ -1,4 +1,4 @@
-var IO_FLAGS, async, chunkingStreams, fs, _;
+var IO_FLAGS, StreamChunker, async, fs, _;
 
 async = require('async');
 
@@ -6,7 +6,7 @@ fs = require('fs');
 
 _ = require('lodash-contrib');
 
-chunkingStreams = require('chunking-streams');
+StreamChunker = require('stream-chunker');
 
 IO_FLAGS = 'rs+';
 
@@ -55,18 +55,9 @@ exports.writeBufferToDevice = function(device, buffer, offset, length, position,
 };
 
 exports.pipeStreamToDevice = function(device, stream, callback) {
-  var chunker, deviceFileStream;
-  deviceFileStream = fs.createWriteStream(device, {
+  return stream.pipe(StreamChunker(512 * 2, {
+    flush: true
+  })).pipe(fs.createWriteStream(device, {
     flags: IO_FLAGS
-  });
-  deviceFileStream.on('error', callback);
-  chunker = new chunkingStreams.SizeChunker({
-    chunkSize: 512,
-    flushTail: false
-  });
-  chunker.on('data', function(chunk) {
-    return deviceFileStream.write(chunk.data);
-  });
-  chunker.on('end', callback);
-  return stream.pipe(chunker);
+  })).on('end', callback).on('error', callback);
 };
