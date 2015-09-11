@@ -8,6 +8,8 @@ diskio
 
 Raw disk I/O that works in all major operating systems.
 
+**DEPRECATED in favor of https://github.com/resin-io/resin-image-write**
+
 Notice this module requires running with admin privileges. Use modules such as [windosu](https://www.npmjs.com/package/windosu) to provide elevation if you require that feature on Windows.
 
 This module is special as it addresses Windows issues when writing directly to a physical drive.
