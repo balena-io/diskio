@@ -23,7 +23,7 @@
     "test": "gulp test",
     "prepublish": "gulp build"
   },
-  "author": "Juan Cruz Viotti <juanchiviotti@gmail.com>",
+  "author": "Juan Cruz Viotti <jviottidc@gmail.com>",
   "license": "MIT",
   "optionalDependencies": {
    "diskpart": "^1.0.0"
