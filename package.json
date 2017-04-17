@@ -1,6 +1,6 @@
 {
   "name": "diskio",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Raw disk I/O that works in all major operating systems",
   "main": "build/diskio.js",
   "homepage": "https://github.com/resin-io/diskio",
@@ -26,7 +26,7 @@
   "author": "Juan Cruz Viotti <jviottidc@gmail.com>",
   "license": "MIT",
   "optionalDependencies": {
-   "diskpart": "^1.0.0"
+    "diskpart": "^1.0.0"
   },
   "devDependencies": {
     "chai": "~1.10.0",
@@ -42,7 +42,7 @@
   },
   "dependencies": {
     "async": "^0.9.0",
-    "chunking-streams": "0.0.8",
-    "lodash-contrib": "^241.4.14"
+    "lodash-contrib": "^241.4.14",
+    "stream-chunker": "^1.1.5"
   }
 }
